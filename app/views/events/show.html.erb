@@ -2,6 +2,7 @@
 <h1><%= @event.title %></h1>
 
 <p><strong>Date de début :</strong> <%= @event.start_date.strftime("%d/%m/%Y %H:%M") %></p>
+<p><strong>Date de fin :</strong> <%= @event.end_date.strftime("%d/%m/%Y %H:%M") %></p>
 <p><strong>Durée :</strong> <%= @event.duration %> minutes</p>
 <p><strong>Prix :</strong> <%= @event.price %> €</p>
 <p><strong>Lieu :</strong> <%= @event.location %></p>
@@ -15,7 +16,7 @@
 <p><strong>Organisateur :</strong> <%=  @event.admin&.first_name  %></p>
 <% end %>
 
-<h2>Participants</h2>
+<h2>Participants (<%= @event.attendees.count %>) </h2>
 <% if @event.attendances.any? %>
   <ul>
     <% @event.attendances.includes(:user).each do |attendance| %>

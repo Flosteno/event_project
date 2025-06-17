@@ -12,6 +12,11 @@ class Event < ApplicationRecord
   validates :location, presence: true
 
 
+  def end_date
+    return nil if start_date.nil? || duration.nil?
+    start_date + duration.minutes
+  end
+
   private
 
   def duration_multiple_of_5
