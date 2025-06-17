@@ -1,2 +1,36 @@
-<h1>Events#new</h1>
-<p>Find me in app/views/events/new.html.erb</p>
+<!-- Events Création -->
+<h1>Créer un nouvel événement</h1>
+
+<%= form_with model: @event, local: true do |form| %>
+  <div class="mb-3">
+    <%= form.label :title %>
+    <%= form.text_field :title, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :start_date %>
+    <%= form.datetime_select :start_date, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :duration, "Durée (minutes)" %>
+    <%= form.number_field :duration, class: "form-control", min: 1 %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :price, "Prix (€)" %>
+    <%= form.number_field :price, class: "form-control", min: 0 %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :location %>
+    <%= form.text_field :location, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :description %>
+    <%= form.text_area :description, class: "form-control", rows: 5 %>
+  </div>
+
+  <%= form.submit "Créer", class: "btn btn-primary" %>
+<% end %>

@@ -19,20 +19,18 @@
 
       <ul class="navbar-nav ms-auto">
         <% if user_signed_in? %>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+          <li class="nav-item ">
+            <a class="nav-link " href="#" role="button" data-bs-toggle="dropdown"
               aria-expanded="false">
               Mon profil
             </a>
-            <ul class="dropdown-menu dropdown-menu-end">
+            <ul class="">
               <li>
-                <%= link_to "Mon profil", edit_user_registration_path, class: "dropdown-item", data: { turbo: false } %>
+                <%= link_to "Mon profil", edit_user_registration_path, class: "", data: { turbo: false } %>
               </li>
               <li>
-                <%= link_to "Se déconnecter", destroy_user_session_path,
-                            method: :delete,
-                            data: { turbo: false },
-                            class: "dropdown-item" %>
+                <%= button_to "Se déconnecter", destroy_user_session_path, method: :delete, form: {class: "d-inline"}, class: "btn btn-link dropdown-item", data: { turbo: false } %>
+
               </li>
             </ul>
           </li>

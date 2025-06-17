@@ -1,0 +1,23 @@
+<!-- Affichage event -->
+<h1><%= @event.title %></h1>
+
+<p><strong>Date de début :</strong> <%= @event.start_date.strftime("%d/%m/%Y %H:%M") %></p>
+<p><strong>Durée :</strong> <%= @event.duration %> minutes</p>
+<p><strong>Prix :</strong> <%= @event.price %> €</p>
+<p><strong>Lieu :</strong> <%= @event.location %></p>
+
+<p><strong>Description :</strong></p>
+<p><%= simple_format(@event.description) %></p>
+
+<p><strong>Organisateur :</strong> <%= link_to @event.admin&.first_name || "Anonyme", user_path(@event.admin) if @event.admin %></p>
+
+<h2>Participants</h2>
+<% if @event.attendances.any? %>
+  <ul>
+    <% @event.attendances.includes(:user).each do |attendance| %>
+      <li><%= attendance.user.first_name %> <%= attendance.user.last_name %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>Aucun participant pour le moment.</p>
+<% end %>
