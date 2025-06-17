@@ -1,0 +1,62 @@
+<ul>
+  <% if user_signed_in? %>
+    <li>
+      <%= link_to "Sign out", destroy_user_session_path, data: {turbo_method: :delete} %>
+    </li>
+
+    <li>
+      Voici ton email : <%= current_user.email %>
+    </li>
+
+    <li>
+      <%= link_to "Secret page", static_pages_secret_path %>
+    </li>
+
+    <li>
+      <%= link_to "Edit email / password", edit_user_registration_path %>
+    </li>
+
+  <% else %>
+    <li>    
+      <%= link_to "Sign in", new_user_session_path %>
+    </li>
+
+    <li>
+      <%= link_to "Sign up", new_user_registration_path %>
+    </li>
+
+  <% end %>
+
+  <!-- Liste des événements -->
+<h1>Liste des événements</h1>
+
+<%= link_to "Créer un nouvel événement", new_event_path, class: "btn btn-primary mb-3" %>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Titre</th>
+      <th>Date</th>
+      <th>Durée (min)</th>
+      <th>Prix (€)</th>
+      <th>Lieu</th>
+      <th>Organisateur</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @events.each do |event| %>
+      <tr>
+        <td><%= event.title %></td>
+        <td><%= event.start_date.strftime("%d/%m/%Y %H:%M") %></td>
+        <td><%= event.duration %></td>
+        <td><%= event.price %></td>
+        <td><%= event.location %></td>
+        <td><%= event.admin&.first_name || "Anonyme" %></td>
+        <td><%= link_to "Voir", event_path(event), class: "btn btn-sm btn-info" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+</ul>

@@ -1,0 +1,28 @@
+<!-- app/views/users/show.html.erb -->
+<h1>Profil de <%= @user.first_name %> <%= @user.last_name %></h1>
+
+<p><strong>Email :</strong> <%= @user.email %></p>
+<p><strong>Description :</strong></p>
+<p><%= simple_format(@user.description || "Aucune description.") %></p>
+
+<h2>Événements créés</h2>
+<% if @user.admin_events.any? %>
+  <ul>
+    <% @user.admin_events.each do |event| %>
+      <li><%= link_to event.title, event_path(event) %> (le <%= event.start_date.strftime("%d/%m/%Y") %>)</li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>Aucun événement créé.</p>
+<% end %>
+
+<h2>Événements auxquels il/elle participe</h2>
+<% if @user.attended_events.any? %>
+  <ul>
+    <% @user.attended_events.each do |event| %>
+      <li><%= link_to event.title, event_path(event) %> (le <%= event.start_date.strftime("%d/%m/%Y") %>)</li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>Aucun événement suivi.</p>
+<% end %>
