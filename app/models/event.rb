@@ -3,6 +3,7 @@ class Event < ApplicationRecord
   has_many :attendances
   has_many :attendees, through: :attendances, source: :user
   validates :start_date, presence: true
+  validate :start_date_cannot_be_in_the_past
   validates :duration, presence: true, numericality: {only_integer: true, greater_than: 0,  message: "doit être un nombre entier strictement positif" }
   validate :duration_multiple_of_5
   validates :title, presence: true, length: { in: 5..140 }
@@ -17,6 +18,12 @@ class Event < ApplicationRecord
     return if duration.nil?
     unless duration % 5 == 0
       errors.add(:duration, "doit être un multiple de 5")
+    end
+  end
+
+  def start_date_cannot_be_in_the_past
+    if start_date.present? && start_date < Time.current
+      errors.add(:start_date, "ne peut pas être dans le passé.")
     end
   end
   
