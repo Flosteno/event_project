@@ -25,12 +25,14 @@ users = 2.times.map do
   last_name = Faker::Name.last_name.downcase
   User.create!(
     email: "#{first_name}.#{last_name}@yopmail.com",
-    encrypted_password: "fakepassword",
+    password: "fakepassword",
+    password_confirmation: "fakepassword",
     first_name: first_name.capitalize,
     last_name: last_name.capitalize,
     description: Faker::Lorem.sentence(word_count: 10)
   )
 end
+
 
 
 puts "Création de 5 événements..."
