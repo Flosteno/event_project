@@ -29,11 +29,23 @@
 
   <body>
     <%= render 'layouts/navbar' %>
+
+
+    <% flash.each do |key, message| %>
+      <div class="alert alert-<%= key == 'notice' ? 'success' : 'danger' %> alert-dismissible fade show" role="alert">
+        <%= message %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    <% end %>
+
+
+
+
     <%= yield %>
 
 
-    <!-- Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-HoA6gL9OqDNC4cHvZzDCXeUomTZYzWhK5x5V1shE7zzV6Jop6AFef9fG4x3zLMaZ" crossorigin="anonymous"></script>
+    <!-- Bootstrap Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
   </body>
 </html>

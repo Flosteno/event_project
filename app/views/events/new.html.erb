@@ -1,3 +1,14 @@
+<% if @event.errors.any? %>
+  <div class="alert alert-danger">
+    <h4><%= pluralize(@event.errors.count, "erreur") %> empêchent cet enregistrement :</h4>
+    <ul>
+      <% @event.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <!-- Events Création -->
 <h1>Créer un nouvel événement</h1>
 
@@ -9,8 +20,9 @@
 
   <div class="mb-3">
     <%= form.label :start_date %>
-    <%= form.datetime_select :start_date, class: "form-control" %>
+    <%= form.text_field :start_date, type: "datetime-local", class: "form-control" %>
   </div>
+
 
   <div class="mb-3">
     <%= form.label :duration, "Durée (minutes)" %>
