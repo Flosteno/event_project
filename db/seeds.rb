@@ -20,15 +20,27 @@ ActiveRecord::Base.connection.reset_pk_sequence!('attendances')
 
 puts "Création de 2 utilisateurs..."
 
-users = 2.times.map do
-  first_name = Faker::Name.first_name.downcase
-  last_name = Faker::Name.last_name.downcase
+# users = 2.times.map do
+#   first_name = Faker::Name.first_name.downcase
+#   last_name = Faker::Name.last_name.downcase
+#   User.create!(
+#     email: "#{first_name}.#{last_name}@yopmail.com",
+#     password: "fakepassword",
+#     password_confirmation: "fakepassword",
+#     first_name: first_name.capitalize,
+#     last_name: last_name.capitalize,
+#     description: Faker::Lorem.sentence(word_count: 10)
+#   )
+# end
+
+users = 2.times.map do |i|
+
   User.create!(
-    email: "#{first_name}.#{last_name}@yopmail.com",
+    email: "pandauser#{i+1}@yopmail.com",
     password: "fakepassword",
     password_confirmation: "fakepassword",
-    first_name: first_name.capitalize,
-    last_name: last_name.capitalize,
+    first_name: "Panda#{i+1}",
+    last_name: "User#{i+1}",
     description: Faker::Lorem.sentence(word_count: 10)
   )
 end

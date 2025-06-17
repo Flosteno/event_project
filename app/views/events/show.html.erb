@@ -9,7 +9,11 @@
 <p><strong>Description :</strong></p>
 <p><%= simple_format(@event.description) %></p>
 
-<p><strong>Organisateur :</strong> <%= link_to @event.admin&.first_name || "Anonyme", user_path(@event.admin) if @event.admin %></p>
+<% if current_user == @event.admin %>
+<p><strong>Organisateur :</strong> <%= link_to @event.admin&.first_name || "Anonyme", user_path(@event.admin) if @event.admin  %></p>
+<% else %>
+<p><strong>Organisateur :</strong> <%=  @event.admin&.first_name  %></p>
+<% end %>
 
 <h2>Participants</h2>
 <% if @event.attendances.any? %>

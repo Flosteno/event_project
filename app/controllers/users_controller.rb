@@ -14,7 +14,17 @@ class UsersController < ApplicationController
     
   end
 
+  def edit
+    @user = User.find(params[:id])
+  end
+
   def update
+    @user = User.find(params[:id])
+    if @user.update(user_params)
+      redirect_to @user, notice: "Profil mis à jour avec succès."
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def destroy
@@ -28,4 +38,9 @@ class UsersController < ApplicationController
       redirect_back fallback_location: root_path, alert: "Accès non autorisé"
     end
   end
+
+  def user_params
+    params.require(:user).permit(:first_name, :last_name, :description)
+  end
+
 end
