@@ -12,9 +12,11 @@
         <li class="nav-item">
           <%= link_to "Accueil", root_path, class: "nav-link text-light" %>
         </li>
+        <% if user_signed_in? %>
         <li class="nav-item">
           <%= link_to "Créer un événement", new_event_path, class: "nav-link text-light" %>
         </li>
+        <% end %>
       </ul>
 
       <ul class="navbar-nav ms-auto">

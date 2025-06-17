@@ -1,24 +1,31 @@
-# README
+# 🎉 EventProject
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Welcome to your Rails project inspired by Eventbrite! This app lets users manage events with authentication, a sleek UI, and PWA support.
 
-Things you may want to cover:
+---
 
-* Ruby version
+## 🚀 Features
 
-* System dependencies
+- **User Authentication** with [Devise](https://github.com/heartcombo/devise)  
+- **Progressive Web App (PWA)** support for offline and mobile-friendly use  
+- Responsive UI using **Bootstrap 5**  
+- Full CRUD for **Events** (Create, Read, Update, Delete)  
+- User **Profiles** with access control  
+- Navigation bar with dynamic links depending on login status
 
-* Configuration
+---
 
-* Database creation
+## 🛠 Installation & Setup
 
-* Database initialization
+  Clone the repo  
+   ```bash
+   git clone <your-repo-url>
+   cd event_project
+   bundle install
+    rails db:create
+    rails db:migrate
+    rails db:seed 
+    rails server
+  ```
+Open your browser at http://localhost:3000
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
