@@ -27,7 +27,7 @@
             </a>
             <ul class="dropdown-menu dropdown-menu-end shadow">
               <li>
-                <%= link_to "Mon profil", edit_user_registration_path, class: "dropdown-item", data: { turbo: false } %>
+                <%= link_to "Mon profil", user_path(current_user), class: "dropdown-item", data: { turbo: false } %>
               </li>
               <li>
                 <%= button_to "Se déconnecter", destroy_user_session_path, method: :delete,
