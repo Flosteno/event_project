@@ -13,5 +13,9 @@ class User < ApplicationRecord
   def welcome_send
     UserMailer.welcome_email(self).deliver_now
   end
+
+  def attend_event?(event)
+    attended_events.exists?(event.id)
+  end
   
 end

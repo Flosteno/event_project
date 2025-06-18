@@ -1,0 +1,9 @@
+<h2>Participants à l’événement : <%= @event.title %></h2>
+
+<ul>
+  <% @attendances.each do |attendance| %>
+    <li>
+      <%= attendance.user.first_name %> <%= attendance.user.last_name %> - <%= attendance.user.email %>
+    </li>
+  <% end %>
+</ul>

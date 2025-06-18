@@ -1,6 +1,18 @@
+<!-- <p style="color: green"><%= notice %></p> -->
+<% if params[:success] %>
+  <p style="color: green">Paiement réussi ! 🎉</p>
+<% elsif params[:canceled] %>
+  <p style="color: red">Paiement annulé.</p>
+<% end %>
+
 <div class="event-container">
   <%= image_tag "https://picsum.photos/seed/#{@event.id}/800/400", alt: @event.title, class: "img-fluid rounded mb-3" %>
-
+  <% if user_signed_in? && current_user != @event.admin && !current_user.attend_event?(@event) %>
+    <%= link_to "Rejoindre l'évènement", new_event_attendance_path(@event), class: "btn btn-primary" %>
+  <% end %>
+  <% if current_user == @event.admin %>
+    <%= link_to "Mon espace événement", attendances_path(event_id: @event.id), class: "btn btn-primary" %>
+  <% end %>
   <h1><%= @event.title %></h1>
 
   <div class="event-info">

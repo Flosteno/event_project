@@ -1,8 +1,19 @@
 Rails.application.routes.draw do
-  resources :events
+  resources :events do
+    resources :attendances, only: [:new, :create]
+  end
   root "events#index"
   devise_for :users
   resources :users, only: [:show, :edit, :update]
+  post 'checkout', to: 'checkout#create'
+  resources :attendances do
+    collection do
+      get :success
+    end
+  end
+
+  
+ 
 
   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
