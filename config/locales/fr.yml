@@ -43,6 +43,10 @@ fr:
               less_than_or_equal_to: "doit être inférieur ou égal à %{count}"
             location:
               blank: "ne peut pas être vide"
+        user:
+          attributes:
+            password:
+              too_short: "est trop court (minimum %{count} caractères)"
       messages:
         must_be_a_multiple_of_5: "doit être un multiple de 5"
         past_date: "ne peut pas être une date passée"
