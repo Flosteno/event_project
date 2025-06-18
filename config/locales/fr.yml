@@ -47,6 +47,9 @@ fr:
           attributes:
             password:
               too_short: "est trop court (minimum %{count} caractères)"
+            email:
+              taken: "cet email est déjà utilisé"
+              
       messages:
         must_be_a_multiple_of_5: "doit être un multiple de 5"
         past_date: "ne peut pas être une date passée"
