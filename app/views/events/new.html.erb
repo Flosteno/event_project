@@ -1,48 +1,49 @@
-<% if @event.errors.any? %>
-  <div class="alert alert-danger">
-    <h4><%= pluralize(@event.errors.count, "erreur") %> empêchent cet enregistrement :</h4>
-    <ul>
-      <% @event.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
+<div class="form-container">
+  <% if @event.errors.any? %>
+    <div class="error-message">
+      <h2><%= pluralize(@event.errors.count, "erreur") %> ont empêché l’enregistrement :</h2>
+      <ul>
+        <% @event.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-<!-- Events Création -->
-<h1>Créer un nouvel événement</h1>
+  <h1>Créer un nouvel événement</h1>
 
-<%= form_with model: @event, method: :post, local: true do |form| %>
-  <div class="mb-3">
-    <%= form.label :title %>
-    <%= form.text_field :title, class: "form-control" %>
-  </div>
+  <%= form_with model: @event, method: :post, local: true do |form| %>
+    
+    <div>
+      <%= form.label :title %>
+      <%= form.text_field :title %>
+    </div>
 
-  <div class="mb-3">
-    <%= form.label :start_date %>
-    <%= form.text_field :start_date, type: "datetime-local", class: "form-control" %>
-  </div>
+    <div>
+      <%= form.label :start_date, "Date de début" %>
+      <%= form.text_field :start_date, type: "datetime-local", min: (Time.zone.now + 2.hours).strftime("%Y-%m-%dT%H:%M") %>
+    </div>
 
+    <div>
+      <%= form.label :duration, "Durée (minutes)" %>
+      <%= form.number_field :duration, min: 5, step: 5 %>
+    </div>
 
-  <div class="mb-3">
-    <%= form.label :duration, "Durée (minutes)" %>
-    <%= form.number_field :duration, class: "form-control", min: 1 %>
-  </div>
+    <div>
+      <%= form.label :price, "Prix (€)" %>
+      <%= form.number_field :price, min: 0 %>
+    </div>
 
-  <div class="mb-3">
-    <%= form.label :price, "Prix (€)" %>
-    <%= form.number_field :price, class: "form-control", min: 0 %>
-  </div>
+    <div>
+      <%= form.label :location, "Lieu" %>
+      <%= form.text_field :location %>
+    </div>
 
-  <div class="mb-3">
-    <%= form.label :location %>
-    <%= form.text_field :location, class: "form-control" %>
-  </div>
+    <div>
+      <%= form.label :description %>
+      <%= form.text_area :description, rows: 5 %>
+    </div>
 
-  <div class="mb-3">
-    <%= form.label :description %>
-    <%= form.text_area :description, class: "form-control", rows: 5 %>
-  </div>
-
-  <%= form.submit "Créer", class: "btn btn-primary" %>
-<% end %>
+    <%= form.submit "Créer", class: "btn" %>
+  <% end %>
+</div>

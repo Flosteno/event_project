@@ -46,6 +46,7 @@ fr:
       messages:
         must_be_a_multiple_of_5: "doit être un multiple de 5"
         past_date: "ne peut pas être une date passée"
+        not_a_number: "n'est pas un nombre valide"
 
 
   devise:
