@@ -68,3 +68,5 @@ gem "dotenv-rails", "~> 3.1"
 
 gem "devise"
 gem "table_print", "~> 1.5"
+
+gem "stripe", "~> 15.2"
