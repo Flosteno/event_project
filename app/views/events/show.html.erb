@@ -1,28 +1,36 @@
-<!-- Affichage event -->
-<h1><%= @event.title %></h1>
+<div class="event-container">
+  <h1><%= @event.title %></h1>
 
-<p><strong>Date de début :</strong> <%= @event.start_date.strftime("%d/%m/%Y %H:%M") %></p>
-<p><strong>Date de fin :</strong> <%= @event.end_date.strftime("%d/%m/%Y %H:%M") %></p>
-<p><strong>Durée :</strong> <%= @event.duration %> minutes</p>
-<p><strong>Prix :</strong> <%= @event.price %> €</p>
-<p><strong>Lieu :</strong> <%= @event.location %></p>
+  <div class="event-info">
+    <p><strong>Date de début :</strong> <%= @event.start_date.strftime("%d/%m/%Y %H:%M") %></p>
+    <p><strong>Date de fin :</strong> <%= @event.end_date.strftime("%d/%m/%Y %H:%M") %></p>
+    <p><strong>Durée :</strong> <%= @event.duration %> minutes</p>
+    <p><strong>Prix :</strong> <%= @event.price %> €</p>
+    <p><strong>Lieu :</strong> <%= @event.location %></p>
+  </div>
 
-<p><strong>Description :</strong></p>
-<p><%= simple_format(@event.description) %></p>
+  <h2>Description</h2>
+  <div class="event-description">
+    <%= simple_format(@event.description) %>
+  </div>
 
-<% if current_user == @event.admin %>
-<p><strong>Organisateur :</strong> <%= link_to @event.admin&.first_name || "Anonyme", user_path(@event.admin) if @event.admin  %></p>
-<% else %>
-<p><strong>Organisateur :</strong> <%=  @event.admin&.first_name  %></p>
-<% end %>
-
-<h2>Participants (<%= @event.attendees.count %>) </h2>
-<% if @event.attendances.any? %>
-  <ul>
-    <% @event.attendances.includes(:user).each do |attendance| %>
-      <li><%= attendance.user.first_name %> <%= attendance.user.last_name %></li>
+  <p class="organizer">
+    <strong>Organisateur :</strong>
+    <% if current_user == @event.admin %>
+      <%= link_to @event.admin&.first_name || "Anonyme", user_path(@event.admin) if @event.admin %>
+    <% else %>
+      <%= @event.admin&.first_name %>
     <% end %>
-  </ul>
-<% else %>
-  <p>Aucun participant pour le moment.</p>
-<% end %>
+  </p>
+
+  <h2>Participants (<%= @event.attendees.count %>)</h2>
+  <% if @event.attendances.any? %>
+    <ul class="participants-list">
+      <% @event.attendances.includes(:user).each do |attendance| %>
+        <li><%= attendance.user.first_name %> <%= attendance.user.last_name %></li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p class="empty-message">Aucun participant pour le moment.</p>
+  <% end %>
+</div>

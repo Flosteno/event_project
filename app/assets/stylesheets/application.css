@@ -25,6 +25,9 @@ body {
   margin-bottom: 2rem;
   padding: 3rem 2rem;
   overflow: hidden;
+  text-align: center;
+  border-radius: 1rem;
+  box-shadow: 0 8px 15px rgba(233,30,99,0.4);
 }
 
 .bg-energetic::before {
