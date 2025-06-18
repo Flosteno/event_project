@@ -1,20 +1,33 @@
-<h1>Modifier mon profil</h1>
+<div class="form-container">
+  <h1>Modifier mon profil</h1>
 
-<%= form_with(model: @user, local: true) do |form| %>
-  <div class="mb-3">
-    <%= form.label :first_name %>
-    <%= form.text_field :first_name, class: "form-control" %>
-  </div>
+  <%= form_with(model: @user, local: true) do |form| %>
+    <% if @user.errors.any? %>
+      <div class="error-message">
+        <h4><%= pluralize(@user.errors.count, "erreur") %> empêchent la mise à jour :</h4>
+        <ul>
+          <% @user.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
 
-  <div class="mb-3">
-    <%= form.label :last_name %>
-    <%= form.text_field :last_name, class: "form-control" %>
-  </div>
+    <div class="form-group">
+      <%= form.label :first_name %>
+      <%= form.text_field :first_name %>
+    </div>
 
-  <div class="mb-3">
-    <%= form.label :description %>
-    <%= form.text_area :description, class: "form-control" %>
-  </div>
+    <div class="form-group">
+      <%= form.label :last_name %>
+      <%= form.text_field :last_name %>
+    </div>
 
-  <%= form.submit "Mettre à jour", class: "btn btn-primary" %>
-<% end %>
+    <div class="form-group">
+      <%= form.label :description %>
+      <%= form.text_area :description, rows: 5 %>
+    </div>
+
+    <%= form.submit "Mettre à jour" %>
+  <% end %>
+</div>
