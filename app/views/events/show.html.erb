@@ -1,4 +1,6 @@
 <div class="event-container">
+  <%= image_tag "https://picsum.photos/seed/#{@event.id}/800/400", alt: @event.title, class: "img-fluid rounded mb-3" %>
+
   <h1><%= @event.title %></h1>
 
   <div class="event-info">
