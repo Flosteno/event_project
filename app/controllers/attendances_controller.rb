@@ -14,7 +14,7 @@ class AttendancesController < ApplicationController
 
     # Vérifier que le paiement est réussi
     if session.payment_status == "paid"
-      # Créer l'attendance (adapté selon ta logique)
+      # Créer l'attendance 
       Attendance.create!(
         user: current_user,
         event: event,
@@ -24,6 +24,24 @@ class AttendancesController < ApplicationController
       redirect_to event_path(event)
     else
       flash[:alert] = "Le paiement n'a pas été validé."
+      redirect_to event_path(event)
+    end
+  end
+
+  def create
+    event = Event.find(params[:event_id])
+
+    if event
+      # Créer l'attendance 
+      Attendance.create!(
+        user: current_user,
+        event: event,
+        stripe_customer_id: "",
+      )
+      flash[:notice] = "Votre inscription a bien été enregistrée !"
+      redirect_to event_path(event)
+    else
+      flash[:alert] = "L'inscription n'a pas été validé."
       redirect_to event_path(event)
     end
   end

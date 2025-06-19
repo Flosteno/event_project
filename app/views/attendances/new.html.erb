@@ -18,11 +18,15 @@
     </div>
   </div>
 
-  <%= form_with url: checkout_path, method: :post do %>
-    <%= hidden_field_tag :event_id, @event.id %>
-
-    <div class="text-center" style="margin-top: 2rem;">
-      <%= button_to "Payer avec Stripe", checkout_path(event_id: @event.id), method: :post, class: "btn btn-success btn-lg", data: { turbo: false } %>
-    </div>
-  <% end %>
+  <%#  FORMULAIRE SELON GRATUIT OU PAYANT %>
+  <div class="text-center" style="margin-top: 2rem;">
+    <% if @event.is_free? %>
+      <%= button_to "S'inscrire gratuitement", attendances_path(event_id: @event.id), method: :post, class: "btn btn-success btn-lg", data: { turbo: false } %>
+    <% else %>
+      <%= form_with url: checkout_path, method: :post do %>
+        <%= hidden_field_tag :event_id, @event.id %>
+        <%= submit_tag "Payer avec Stripe", class: "btn btn-success btn-lg", data: { turbo: false } %>
+      <% end %>
+    <% end %>
+  </div>
 </div>

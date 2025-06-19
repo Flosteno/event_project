@@ -8,13 +8,17 @@ class Event < ApplicationRecord
   validate :duration_multiple_of_5
   validates :title, presence: true, length: { in: 5..140 }
   validates :description, presence: true, length: { in: 20..1000 }
-  validates :price, presence: true, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to:1000 }
+  validates :price, presence: true, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to:1000 }
   validates :location, presence: true
 
 
   def end_date
     return nil if start_date.nil? || duration.nil?
     start_date + duration.minutes
+  end
+
+  def is_free?
+    price == 0
   end
 
   private
@@ -31,5 +35,6 @@ class Event < ApplicationRecord
       errors.add(:start_date, "ne peut pas être dans le passé.")
     end
   end
+
   
 end

@@ -40,7 +40,8 @@ class EventsController < ApplicationController
   end
 
   def destroy
-    
+    @event.destroy
+    redirect_to root_path, notice: "Suppression de l'évènement avec succés"
   end
 
   def event_params
