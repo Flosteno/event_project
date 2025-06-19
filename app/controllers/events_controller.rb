@@ -1,13 +1,14 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
-  before_action :correct_user, only: [:edit, :update]
+  before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :is_admin?, only: [:edit, :update, :destroy]
 
   def index
     @events = Event.all
   end
 
   def show
-    @event = Event.find(params[:id])
+    
   end
 
   def new
@@ -26,22 +27,34 @@ class EventsController < ApplicationController
   end
 
   def edit
+    
   end
 
   def update
+    
+    if @event.update(event_params)
+      redirect_to @event, notice: "Event mis à jour avec succès."
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def destroy
+    
   end
 
   def event_params
     params.require(:event).permit(:title, :start_date, :duration, :price, :location, :description)
   end
 
-  def correct_user
-    admin = @event.admin
-    unless admin == current_user
-      redirect_back fallback_location: root_path, alert: "Accès non autorisé"
+  def is_admin?
+    unless @event.admin == current_user
+      redirect_back(fallback_location: root_path, alert: "Accès réservé à l'administrateur de l'événement.")
     end
   end
+
+  def set_event
+    @event = Event.find(params[:id])
+  end
+
 end

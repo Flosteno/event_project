@@ -1,19 +1,28 @@
-<h1>Inscription à l'événement</h1>
+<div class="event-container">
+  <h1>Inscription à l'événement</h1>
 
-<div class="card mb-4 shadow-sm">
-  <div class="card-body">
-    <h3 class="card-title"><%= @event.title %></h3>
-    <p class="card-text"><strong>Date :</strong> <%= l(@event.start_date, format: :long) %></p>
-    <p class="card-text"><strong>Lieu :</strong> <%= @event.location %></p>
-    <p class="card-text"><strong>Prix :</strong> <%= number_to_currency(@event.price, unit: "€", separator: ",", delimiter: " ") %></p>
-    <p class="card-text"><strong>Description :</strong><br><%= simple_format(@event.description) %></p>
+  <div class="card mb-4 shadow-sm">
+    <div class="card-body">
+      <h3 class="card-title"><%= @event.title %></h3>
+
+      <div class="event-info">
+        <p><strong>Date :</strong> <%= l(@event.start_date, format: :long) %></p>
+        <p><strong>Lieu :</strong> <%= @event.location %></p>
+        <p><strong>Prix :</strong> <%= number_to_currency(@event.price, unit: "€", separator: ",", delimiter: " ") %></p>
+      </div>
+
+      <div class="event-description">
+        <strong>Description :</strong>
+        <p><%= simple_format(@event.description) %></p>
+      </div>
+    </div>
   </div>
+
+  <%= form_with url: checkout_path, method: :post do %>
+    <%= hidden_field_tag :event_id, @event.id %>
+
+    <div class="text-center" style="margin-top: 2rem;">
+      <%= button_to "Payer avec Stripe", checkout_path(event_id: @event.id), method: :post, class: "btn btn-success btn-lg", data: { turbo: false } %>
+    </div>
+  <% end %>
 </div>
-
-<%= form_with url: checkout_path, method: :post do |f| %>
-  <%= hidden_field_tag :event_id, @event.id %>
-
-  <div class="text-center">
-    <%= button_to "Payer avec Stripe", checkout_path(event_id: @event.id), method: :post, class: "btn btn-success btn-lg", data: { turbo: false } %>
-  </div>
-<% end %>

@@ -3,6 +3,7 @@
  *= require_self
  *= require variables
  *= require events
+ *= require forms
 */
 
 /* Reset / base */
