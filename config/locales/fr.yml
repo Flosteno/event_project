@@ -7,7 +7,7 @@ fr:
     formats:
       default: "%d/%m/%Y"
       short: "%d %b"
-      long: "%A %d %B %Y"   # exemple : "mercredi 17 juin 2025"
+      long: "%A %d %B %Y"
 
   time:
     formats:
@@ -15,8 +15,13 @@ fr:
       short: "%d %b %H:%M"
       long: "%A %d %B %Y à %H:%M"
 
-
   activerecord:
+    models:
+      user: "Utilisateur"
+    attributes:
+      user:
+        email: "Email"
+        password: "Mot de passe"
     errors:
       models:
         event:
@@ -45,16 +50,19 @@ fr:
               blank: "ne peut pas être vide"
         user:
           attributes:
-            password:
-              too_short: "est trop court (minimum %{count} caractères)"
             email:
               taken: "cet email est déjà utilisé"
-              
+              blank: "ne peut pas être vide"
+            password:
+              too_short: "est trop court (minimum %{count} caractères)"
+              blank: "ne peut pas être vide"
       messages:
+        record_invalid: "La validation a échoué : %{errors}"
+        blank: "ne peut pas être vide"
+        too_short: "est trop court (minimum %{count} caractères)"
+        not_a_number: "n'est pas un nombre valide"
         must_be_a_multiple_of_5: "doit être un multiple de 5"
         past_date: "ne peut pas être une date passée"
-        not_a_number: "n'est pas un nombre valide"
-
 
   devise:
     confirmations:
@@ -108,6 +116,7 @@ fr:
       send_instructions: "Vous allez recevoir les instructions nécessaires au déverrouillage de votre compte dans quelques instants."
       send_paranoid_instructions: "Si votre compte existe, vous allez bientôt recevoir un email contenant les instructions pour le déverrouiller."
       unlocked: "Votre compte a été déverrouillé avec succès, vous êtes maintenant connecté."
+
   errors:
     messages:
       already_confirmed: "a déjà été validé(e), veuillez essayer de vous connecter"

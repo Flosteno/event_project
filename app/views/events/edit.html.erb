@@ -26,7 +26,12 @@
 
     <div class="form-group">
       <%= form.label :start_date, "Date de début" %>
-      <%= form.text_field :start_date, type: "datetime-local", min: (Time.zone.now + 2.hours).strftime("%Y-%m-%dT%H:%M"), require: true%>
+      <%= form.text_field :start_date,
+      type: "datetime-local",
+      value: @event.start_date.strftime("%Y-%m-%dT%H:%M"),
+      min: (Time.zone.now + 2.hours).strftime("%Y-%m-%dT%H:%M"),
+      required: true %>
+
     </div>
 
     <div class="form-group">
@@ -44,11 +49,8 @@
       <%= form.text_field :location, required: true %>
     </div>
 
-    <div class="form-group">
-      <%= form.label :admin_id, "Administrateur (ID utilisateur)" %>
-      <%= form.number_field :admin_id, required: true %>
-      <p class="form-text">L'ID de l'utilisateur administrateur de l'événement.</p>
-    </div>
+    <%= form.hidden_field :admin_id %>
+
 
     <%= form.submit "Mettre à jour", class: "btn-edit" %>
   <% end %>

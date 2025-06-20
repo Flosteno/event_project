@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_many :admin_events, class_name: "Event", foreign_key: "admin_id", dependent: :destroy
   
   def welcome_send
+    puts "Envoie de l'email"
     UserMailer.welcome_email(self).deliver_now
   end
 
