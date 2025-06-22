@@ -97,4 +97,6 @@ Rails.application.configure do
     user_name: ENV["GMAIL_LOGIN"],
     password: ENV["GMAIL_PWD"]
   }
+
+  config.require_master_key = true
 end
