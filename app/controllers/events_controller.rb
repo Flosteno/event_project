@@ -45,7 +45,7 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:title, :start_date, :duration, :price, :location, :description)
+    params.require(:event).permit(:title, :start_date, :duration, :price, :location, :description, :picture)
   end
 
   def is_admin?

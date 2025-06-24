@@ -2,7 +2,7 @@
 <div class="form-container">
   <h1>Modifier l'événement</h1>
 
-  <%= form_with(model: @event, local: true) do |form| %>
+  <%= form_with(model: @event, local: true, multipart: true) do |form| %>
     <% if @event.errors.any? %>
       <div class="error-message">
         <h2><%= pluralize(@event.errors.count, "erreur") %> empêchent la sauvegarde :</h2>
@@ -47,6 +47,11 @@
     <div class="form-group">
       <%= form.label :location, "Lieu" %>
       <%= form.text_field :location, required: true %>
+    </div>
+
+    <div>
+      <%= form.label :picture, "Image de l'évènement" %>
+      <%= form.file_field :picture %>
     </div>
 
     <%= form.hidden_field :admin_id %>
