@@ -3,24 +3,34 @@
     <div class="col-12 col-md-6">
       <div class="card shadow-sm border-0 h-100">
         <div class="row g-0 align-items-center">
+
           <div class="col-auto">
             <img src="https://randomuser.me/api/portraits/men/32.jpg"
                  alt="Utilisateur"
                  class="img-fluid rounded-start"
                  style="height: 100px; width: 100px; object-fit: cover;" />
           </div>
+          
           <div class="col">
             <div class="card-body">
-              <h5 class="card-title mb-1">
-                <%= attendance.user.first_name %> <%= attendance.user.last_name %>
+              <h5 class="card-title mb-1"> 
+                <% if attendance.user.first_name? && attendance.user.last_name? %>
+                  <%= attendance.user.first_name %> <%= attendance.user.last_name %>
+                <% else %>
+                  Anonyme
+                <% end %>                
               </h5>
+              
               <p class="card-text mb-1">
                 Participant depuis <%= time_ago_in_words(attendance.user.created_at) %>
               </p>
 
-              <p class="text-muted small">
-                Ville : <%= @event.location %>
-              </p>
+              <% if attendance.user.description %>
+                <p class="text-muted small">
+                  Description : <%= attendance.user.description %>
+                </p>
+              <% end %>
+              
             </div>
           </div>
         </div>
