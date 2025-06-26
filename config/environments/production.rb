@@ -99,7 +99,7 @@ Rails.application.configure do
   #   password: ENV["GMAIL_PWD"]
   # }
 
-  config.action_mailer.delivery_method = :letter-opener
+  config.action_mailer.delivery_method = :letter_opener
   config.action_mailer.perform_deliveries = true
 
   config.require_master_key = true
