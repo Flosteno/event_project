@@ -1,0 +1,27 @@
+<div class="container py-5 shadow">
+  <!-- 👤 En-tête Profil -->
+  <div class="row mb-4">
+    <div class="col-md-12">
+      <h1 class="h3">Profil de <%= @user.first_name %> <%= @user.last_name %></h1>
+    </div>
+  </div>
+
+  <!-- 🧱 Bloc Infos utilisateur -->
+  <div class="row mb-4">
+    <div class="col-md-6">
+      <div class="bg-light p-3 rounded shadow-sm">
+        <h2 class="h5 mb-3">Informations</h2>
+        <p><strong>Email :</strong> <%= @user.email %></p>
+        <p><strong>Description :</strong><br> <%= simple_format(@user.description || "Aucune description disponible.") %></p>
+
+        <div class="d-flex flex-column gap-2 mt-3">
+          <%= link_to "Modifier email / mot de passe", edit_user_registration_path, class: "btn btn-outline-primary" %>
+          <%= link_to "Modifier nom / description", edit_user_path(@user), class: "btn btn-outline-secondary" %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%= render 'created_event_list' %>
+
+  <%= render 'attended_event_list' %>

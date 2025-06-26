@@ -1,9 +1,0 @@
-:root {
-  --color-primary: #e91e63;    /* rose vif */
-  --color-secondary: #ff9800;  /* orange lumineux */
-  --color-accent: #ffc107;     /* jaune doré */
-  --color-bg: #1a1a2e;         /* bleu très foncé */
-  --color-text-light: #ffffff; /* blanc */
-  --color-text-muted: #f0e6f6; /* violet clair */
-  --color-btn-outline: var(--color-primary);
-}

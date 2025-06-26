@@ -1,0 +1,32 @@
+<h2 class="mb-4 text-center">Tous les événements</h2>
+
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mx-4">
+  <% @events.each do |event| %>
+    <div class="col">
+      <div class="card h-100 shadow-sm border-secondary">
+        
+        <div class="h-100 shadow-sm">
+          <% if event.picture.attached? %>
+            <%= image_tag event.picture, class: "card-img-top", alt: event.title, class: "border-bottom border-primary" %>
+          <% else %>
+            <%= image_tag "https://picsum.photos/seed/#{event.id}/400/250", class: "card-img-top", alt: event.title %>
+          <% end %>
+        </div>
+        
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title"><%= event.title %></h5>
+          <p class="card-text mb-1 text-muted">
+            <strong><%= l(event.start_date, format: :long) %></strong>
+          </p>
+          <p class="card-text mb-1"><i class="bi bi-geo-alt"></i> <%= event.location %></p>
+          <p class="card-text mb-1"><i class="bi bi-currency-euro"></i> À partir de <%= number_to_currency(event.price, unit: "€", separator: ",", delimiter: " ") %></p>
+          <p class="card-text small text-muted"><i class="bi bi-person"></i> <%= event.admin&.first_name || "Anonyme" %></p>
+          
+          <div class="mt-auto">
+            <%= link_to "Voir", event_path(event), class: "btn btn-outline-secondary w-100" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

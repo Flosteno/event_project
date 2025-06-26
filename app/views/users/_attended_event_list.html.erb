@@ -1,0 +1,22 @@
+<!-- 👥 Événements suivis -->
+  <div class="row mb-4">
+    <div class="col-md-12">
+      <div class="bg-white p-3 rounded shadow-sm">
+        <h2 class="h5 mb-3">📌 Événements suivis</h2>
+        <% if @user.attended_events.any? %>
+          <ul class="list-unstyled">
+            <% @user.attended_events.each do |event| %>
+              <li class="mb-2">
+                <i class="bi bi-check-circle text-success me-1"></i>
+                <%= link_to event.title, event_path(event), class: "fw-bold text-decoration-none text-success" %>
+                <small class="text-muted">(le <%= event.start_date.strftime("%d/%m/%Y") %>)</small>
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <p class="text-muted">Aucun événement suivi pour le moment.</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

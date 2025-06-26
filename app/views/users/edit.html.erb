@@ -1,5 +1,8 @@
-<div class="form-container">
-  <h1>Modifier mon profil</h1>
+<div class="container d-flex justify-content-center align-items-center flex-column my-auto">
+
+ <div class="card p-4 shadow" style="width: 350px;">
+
+    <h3 class="mb-3 text-center">Modifier mon profil</h3>
 
   <%= form_with(model: @user, local: true) do |form| %>
     <% if @user.errors.any? %>
@@ -13,21 +16,22 @@
       </div>
     <% end %>
 
-    <div class="form-group">
-      <%= form.label :first_name %>
-      <%= form.text_field :first_name %>
+    <div class="form-group mb-3">
+      <%= form.label :first_name, class: "form-label" %>
+      <%= form.text_field :first_name, class: "form-control" %>
     </div>
 
-    <div class="form-group">
-      <%= form.label :last_name %>
-      <%= form.text_field :last_name %>
+    <div class="form-group mb-3">
+      <%= form.label :last_name, class: "form-label" %>
+      <%= form.text_field :last_name, class: "form-control" %>
     </div>
 
-    <div class="form-group">
-      <%= form.label :description %>
-      <%= form.text_area :description, rows: 5 %>
+    <div class="form-group mb-3">
+      <%= form.label :description, class: "form-label" %>
+      <%= form.text_area :description, rows: 5, class: "form-control" %>
     </div>
 
-    <%= form.submit "Mettre à jour" %>
+    <%= form.submit "Mettre à jour", class: "btn btn-primary w-100" %>
   <% end %>
+ </div>
 </div>

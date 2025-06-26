@@ -1,0 +1,21 @@
+<!-- 🗂️ Événements créés -->
+  <div class="row mb-4">
+    <div class="col-md-12">
+      <div class="bg-white p-3 rounded shadow-sm">
+        <h2 class="h5 mb-3">🎯 Événements créés</h2>
+        <% if @user.admin_events.any? %>
+          <ul class="list-unstyled">
+            <% @user.admin_events.each do |event| %>
+              <li class="mb-2">
+                <i class="bi bi-calendar-event text-primary me-1"></i>
+                <%= link_to event.title, event_path(event), class: "fw-bold text-decoration-none text-primary" %>
+                <small class="text-muted">(le <%= event.start_date.strftime("%d/%m/%Y") %>)</small>
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <p class="text-muted">Aucun événement créé pour le moment.</p>
+        <% end %>
+      </div>
+    </div>
+  </div>

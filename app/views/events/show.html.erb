@@ -5,54 +5,6 @@
   <p style="color: red">Paiement annulé.</p>
 <% end %>
 
-<%# "https://picsum.photos/seed/#{@event.id}/800/400" %>
-<div class="event-container">
-  
-  <% if @event.picture.attached? %>
-    <%= image_tag @event.picture, alt: @event.title, class: "img-fluid rounded mb-3" %>
-  <% else %>
-    <%= image_tag "https://picsum.photos/seed/#{@event.id}/800/400", alt: @event.title, class: "img-fluid rounded mb-3" %>
-  <% end %>
-  
-  
-  <% if user_signed_in? && current_user != @event.admin && !current_user.attend_event?(@event) %>
-    <%= link_to "Rejoindre l'évènement", new_event_attendance_path(@event), class: "btn btn-primary" %>
-  <% end %>
-  <% if current_user == @event.admin %>
-    <%= link_to "Mon espace événement", attendances_path(event_id: @event.id), class: "btn btn-primary" %>
-  <% end %>
-  <h1><%= @event.title %></h1>
 
-  <div class="event-info">
-    <p><strong>Date de début :</strong> <%= @event.start_date.strftime("%d/%m/%Y %H:%M") %></p>
-    <p><strong>Date de fin :</strong> <%= @event.end_date.strftime("%d/%m/%Y %H:%M") %></p>
-    <p><strong>Durée :</strong> <%= @event.duration %> minutes</p>
-    <p><strong>Prix :</strong> <%= @event.price %> €</p>
-    <p><strong>Lieu :</strong> <%= @event.location %></p>
-  </div>
 
-  <h2>Description</h2>
-  <div class="event-description">
-    <%= simple_format(@event.description) %>
-  </div>
-
-  <p class="organizer">
-    <strong>Organisateur :</strong>
-    <% if current_user == @event.admin %>
-      <%= link_to @event.admin&.first_name || "Anonyme", user_path(@event.admin) if @event.admin %>
-    <% else %>
-      <%= @event.admin&.first_name %>
-    <% end %>
-  </p>
-
-  <h2>Participants (<%= @event.attendees.count %>)</h2>
-  <% if @event.attendances.any? %>
-    <ul class="participants-list">
-      <% @event.attendances.includes(:user).each do |attendance| %>
-        <li><%= attendance.user.first_name %> <%= attendance.user.last_name %></li>
-      <% end %>
-    </ul>
-  <% else %>
-    <p class="empty-message">Aucun participant pour le moment.</p>
-  <% end %>
-</div>
+<%= render 'presentation' %>

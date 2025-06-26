@@ -67,6 +67,18 @@ gem "faker", "~> 3.5"
 gem "dotenv-rails", "~> 3.1"
 
 gem "devise"
-gem "table_print", "~> 1.5"
+
+group :development do
+ gem "table_print", "~> 1.5"
+end
 
 gem "stripe", "~> 15.2"
+
+group :development do
+  gem "hotwire-spark"
+end
+
+group :development do
+  gem 'letter_opener'
+end
+

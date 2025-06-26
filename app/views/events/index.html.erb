@@ -1,49 +1,6 @@
 
 
-<!-- Jumbotron / Section de présentation -->
-<div class="p-5 mb-4 rounded-3 bg-energetic">
-  <div class="container-fluid py-5">
-    <h1 class="display-4 fw-bold">Bienvenue sur EventProject</h1>
-    <p class="col-md-8 fs-5 mx-auto">Retrouvez ici tous les événements disponibles. N'hésitez pas à participer à ceux qui vous intéressent !</p>
-    
-    <% if user_signed_in? %>
-      <%= link_to "Créer un nouvel événement", new_event_path, class: "btn btn-primary btn-lg" %>
-    <% else %>
-      <p class="text-light mx-auto">Connectez-vous pour pouvoir créer un nouvel événement.</p>
-      <%= link_to "Se connecter", new_user_session_path, class: "btn btn-outline-primary me-2" %>
-      <%= link_to "S'inscrire", new_user_registration_path, class: "btn btn-outline-secondary" %>
-    <% end %>
-  </div>
-</div>
+<%= render 'layouts/banner' %>
 
 <!-- Liste des événements -->
-<h2 class="mb-4">Tous les événements</h2>
-
-<div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-  <% @events.each do |event| %>
-    <div class="col">
-      <div class="card h-100 shadow-sm">
-        
-        <% if event.picture.attached? %>
-          <%= image_tag event.picture, class: "card-img-top", alt: event.title %>
-        <% else %>
-          <%= image_tag "https://picsum.photos/seed/#{event.id}/400/250", class: "card-img-top", alt: event.title %>
-        <% end %>
-        
-        <div class="card-body d-flex flex-column">
-          <h5 class="card-title"><%= event.title %></h5>
-          <p class="card-text mb-1 text-muted">
-            <strong><%= l(event.start_date, format: :long) %></strong>
-          </p>
-          <p class="card-text mb-1"><i class="bi bi-geo-alt"></i> <%= event.location %></p>
-          <p class="card-text mb-1"><i class="bi bi-currency-euro"></i> À partir de <%= number_to_currency(event.price, unit: "€", separator: ",", delimiter: " ") %></p>
-          <p class="card-text small text-muted"><i class="bi bi-person"></i> <%= event.admin&.first_name || "Anonyme" %></p>
-          
-          <div class="mt-auto">
-            <%= link_to "Voir", event_path(event), class: "btn btn-outline-primary w-100" %>
-          </div>
-        </div>
-      </div>
-    </div>
-  <% end %>
-</div>
+<%= render 'events/cards_list' %>

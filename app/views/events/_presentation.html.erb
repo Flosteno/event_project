@@ -1,0 +1,107 @@
+
+
+
+      <div class="container py-5 shadow">
+        <!-- 🧱 Bloc Image + Infos principales -->
+        <div class="row mb-5">
+          <!-- 🖼️ Image -->
+          <div class="col-md-8">
+            <% image_url = @event.picture.attached? ? url_for(@event.picture) : "https://picsum.photos/seed/#{@event.id}/500/300" %>
+              <img
+                src="<%= image_url %>"
+                alt="Image événement"
+                class="shadow-sm w-100"
+                style="border-radius: 0.5rem; object-fit: cover;"
+              />
+
+          </div>
+          <!-- ℹ️ Infos importantes -->
+          <div class="col-md-4">
+            <h1 class="h3 mb-3"><%= @event.title %></h1>
+            <p><strong>Date de début :</strong> <%= @event.start_date.strftime("%d/%m/%Y %H:%M") %></p>
+            <p><strong>Date de fin :</strong> <%= @event.end_date.strftime("%d/%m/%Y %H:%M") %></p>
+            <p><strong>Durée :</strong> <%= @event.duration %> minutes</p>
+            <p><strong>Prix :</strong> <%= @event.price %> €</p>
+            <p><strong>Lieu :</strong> <%= @event.location %></p>
+            <% if user_signed_in? && current_user != @event.admin && !current_user.attend_event?(@event) %>
+              <%= link_to "Rejoindre l'évènement", new_event_attendance_path(@event), class: "btn btn-primary" %>
+            <% end %>
+            <% if current_user == @event.admin %>
+              <%= link_to "Mon espace événement", attendances_path(event_id: @event.id), class: "btn btn-primary" %>
+            <% end %>
+          </div>
+        </div>
+        <!-- 🧱 Bloc Icônes + bouton -->
+        <div class="row mb-4">
+          <div class="col-md-12">
+            <div class="bg-light p-3 rounded shadow-sm">
+              <div class="d-flex flex-wrap align-items-center justify-content-between">
+                <div class="d-flex gap-4 flex-wrap">
+                  <div class="d-flex align-items-center gap-2 mb-2">
+                    <i class="bi bi-people-fill text-primary"></i>
+                    <span><%= @event.attendees.count %> participants</span>
+                  </div>
+                  <div class="d-flex align-items-center gap-2 mb-2">
+                    <i class="bi bi-clock text-primary"></i>
+                    <span>Durée : <%= @event.duration %> minutes</span>
+                  </div>
+                  <div class="d-flex align-items-center gap-2 mb-2">
+                    <i class="bi bi-person text-primary"></i>
+                    <span>Organisé par : 
+                      <% if current_user == @event.admin %>
+                        <%= link_to @event.admin&.first_name || "Anonyme", user_path(@event.admin) if @event.admin %>
+                      <% else %>
+                        <%= @event.admin&.first_name || "anonyme" %>
+                      <% end %></span>
+                  </div>
+                </div>
+                <a href="#" class="btn btn-outline-primary">Contacter l'organisateur</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 🧱 Bloc Description + Infos secondaires -->
+        <div class="row mb-5">
+          <!-- 📝 Description -->
+          <div class="col-md-8">
+            <h2 class="h5 mb-3">Description</h2>
+            <p>
+              <%= simple_format(@event.description) %>
+            </p>
+          </div>
+
+          <div class="col-md-8">
+            <h2>Participants (<%= @event.attendees.count %>)</h2>
+            <% if @event.attendances.any? %>
+              <ul class="participants-list">
+                <% @event.attendances.includes(:user).each do |attendance| %>
+                  <li><%= attendance.user.first_name %> <%= attendance.user.last_name %></li>
+                <% end %>
+              </ul>
+            <% else %>
+              <p class="empty-message">Aucun participant pour le moment.</p>
+            <% end %>
+          </div>
+
+          <!-- 📌 Infos supplémentaires -->
+          <div class="col-md-4">
+            <h2 class="h6 mb-3">Informations pratiques</h2>
+            <ul class="list-unstyled">
+              <li><i class="bi bi-train-front"></i> Proche métro ligne 2</li>
+              <li><i class="bi bi-cup-straw"></i> Rafraîchissements inclus</li>
+              <li><i class="bi bi-shield-check"></i> Normes sanitaires respectées</li>
+            </ul>
+          </div>
+        </div>
+        <!-- 🧱 Bloc Réseaux sociaux -->
+        <div class="text-center">
+          <h2 class="h6 mb-3">Partager l'événement</h2>
+          <div class="d-flex justify-content-center gap-3">
+            <a href="#"><i class="bi bi-facebook fs-4 text-primary"></i></a>
+            <a href="#"><i class="bi bi-twitter-x fs-4 text-dark"></i></a>
+            <a href="#"><i class="bi bi-linkedin fs-4 text-primary"></i></a>
+            <a href="#"><i class="bi bi-envelope fs-4 text-secondary"></i></a>
+          </div>
+        </div>
+      </div>
+  
