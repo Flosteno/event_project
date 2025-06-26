@@ -1,21 +1,29 @@
-<div class="event-container">
-  <h2>Participants à l’événement : <%= @event.title %></h2>
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
 
-  <% if @attendances.any? %>
-    <ul class="participants-list">
-      <% @attendances.each do |attendance| %>
-        <li>
-          <%= attendance.user.first_name %> <%= attendance.user.last_name %> - <%= attendance.user.email %>
-        </li>
-      <% end %>
-    </ul>
-  <% else %>
-    <p class="empty-message">Aucun participant pour le moment.</p>
-  <% end %>
+      <div class="card shadow">
+        <div class="card-body">
+          <h2 class="card-title h4 mb-4 text-center">Participants à l’événement : <%= @event.title %></h2>
 
-  <div style="margin-top: 2rem; display: flex; gap: 1rem;">
-    <%= link_to 'Modifier l’événement', edit_event_path(@event), class: 'btn btn-edit' %>
-    <%= button_to 'Supprimer l’événement', event_path(@event), method: :delete, data: { confirm: 'Es-tu sûr de vouloir supprimer cet événement ?' }, class: 'btn btn-delete' %>
+          <% if @attendances.any? %>
+            <div class="d-flex flex-column gap-3">
+              <%= render 'attendees_list' %>
+            </ul>
+          <% else %>
+            <div class="alert alert-info text-center">
+              Aucun participant pour le moment.
+            </div>
+          <% end %>
+
+          <div class="d-flex justify-content-center gap-3">
+            <%= link_to 'Modifier l’événement', edit_event_path(@event), class: 'btn btn-outline-primary' %>
+            <%= button_to 'Supprimer l’événement', event_path(@event), method: :delete, data: { confirm: 'Es-tu sûr de vouloir supprimer cet événement ?' }, class: 'btn btn-danger' %>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
 </div>
-
+</div>
