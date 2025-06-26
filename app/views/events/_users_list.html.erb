@@ -1,0 +1,15 @@
+<div class="col-md-8">
+  <h2>Participants (<%= @event.attendees.count %>)</h2>
+  <ul class="list-group list-group-flush shadow-sm border rounded">
+    <% @event.attendances.each do |attendance| %>
+      <li class="list-group-item d-flex align-items-center">
+        <i class="bi bi-person-fill me-2 text-primary"></i>
+        <% if attendance.user.first_name.present? && attendance.user.last_name.present? %>
+          <span><%= attendance.user.first_name %> <%= attendance.user.last_name %></span>
+        <% else %>
+          <span class="text-muted">Utilisateur anonyme</span>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</div>

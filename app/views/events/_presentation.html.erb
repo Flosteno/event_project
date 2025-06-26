@@ -70,18 +70,7 @@
             </p>
           </div>
 
-          <div class="col-md-8">
-            <h2>Participants (<%= @event.attendees.count %>)</h2>
-            <% if @event.attendances.any? %>
-              <ul class="participants-list">
-                <% @event.attendances.includes(:user).each do |attendance| %>
-                  <li><%= attendance.user.first_name %> <%= attendance.user.last_name %></li>
-                <% end %>
-              </ul>
-            <% else %>
-              <p class="empty-message">Aucun participant pour le moment.</p>
-            <% end %>
-          </div>
+          <%= render 'users_list' %>
 
           <!-- 📌 Infos supplémentaires -->
           <div class="col-md-4">
