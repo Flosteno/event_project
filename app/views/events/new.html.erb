@@ -1,54 +1,67 @@
-<div class="form-container">
-  <% if @event.errors.any? %>
-    <div class="error-message">
-      <h2><%= pluralize(@event.errors.count, "erreur") %> ont empêché l’enregistrement :</h2>
-      <ul>
-        <% @event.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+
+      <!-- 🔴 Affichage des erreurs -->
+      <% if @event.errors.any? %>
+        <div class="alert alert-danger">
+          <h4 class="alert-heading"><%= pluralize(@event.errors.count, "erreur") %> ont empêché l’enregistrement :</h4>
+          <ul class="mb-0">
+            <% @event.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="card shadow">
+        <div class="card-body">
+          <h1 class="card-title h4 mb-4 text-center">Créer un nouvel événement</h1>
+
+          <%= form_with model: @event, local: true, multipart: true do |form| %>
+            <div class="mb-3">
+              <%= form.label :title, class: "form-label" %>
+              <%= form.text_field :title, class: "form-control" %>
+            </div>
+
+            <div class="mb-3">
+              <%= form.label :start_date, "Date de début", class: "form-label" %>
+              <%= form.text_field :start_date, type: "datetime-local", min: (Time.zone.now + 2.hours).strftime("%Y-%m-%dT%H:%M"), class: "form-control" %>
+            </div>
+
+            <div class="mb-3">
+              <%= form.label :duration, "Durée (minutes)", class: "form-label" %>
+              <%= form.number_field :duration, min: 5, step: 5, class: "form-control" %>
+            </div>
+
+            <div class="mb-3">
+              <%= form.label :price, "Prix (€)", class: "form-label" %>
+              <%= form.number_field :price, min: 0, class: "form-control" %>
+            </div>
+
+            <div class="mb-3">
+              <%= form.label :location, "Lieu", class: "form-label" %>
+              <%= form.text_field :location, class: "form-control" %>
+            </div>
+
+            <div class="mb-3">
+              <%= form.label :description, class: "form-label" %>
+              <%= form.text_area :description, rows: 5, class: "form-control" %>
+            </div>
+
+            <div class="mb-4">
+              <%= form.label :picture, "Image de l'évènement", class: "form-label" %>
+              <%= form.file_field :picture, class: "form-control" %>
+            </div>
+
+            <div class="text-center">
+              <%= form.submit "Créer", class: "btn btn-primary px-4" %>
+            </div>
+          <% end %>
+
+        </div>
+      </div>
+      
     </div>
-  <% end %>
-
-  <h1>Créer un nouvel événement</h1>
-
-  <%= form_with model: @event, local: true, multipart: true do |form| %>
-    
-    <div>
-      <%= form.label :title %>
-      <%= form.text_field :title %>
-    </div>
-
-    <div>
-      <%= form.label :start_date, "Date de début" %>
-      <%= form.text_field :start_date, type: "datetime-local", min: (Time.zone.now + 2.hours).strftime("%Y-%m-%dT%H:%M") %>
-    </div>
-
-    <div>
-      <%= form.label :duration, "Durée (minutes)" %>
-      <%= form.number_field :duration, min: 5, step: 5 %>
-    </div>
-
-    <div>
-      <%= form.label :price, "Prix (€)" %>
-      <%= form.number_field :price, min: 0 %>
-    </div>
-
-    <div>
-      <%= form.label :location, "Lieu" %>
-      <%= form.text_field :location %>
-    </div>
-
-    <div>
-      <%= form.label :description %>
-      <%= form.text_area :description, rows: 5 %>
-    </div>
-
-    <div>
-      <%= form.label :picture, "Image de l'évènement" %>
-      <%= form.file_field :picture %>
-    </div>
-
-    <%= form.submit "Créer", class: "btn" %>
-  <% end %>
+  </div>
 </div>
