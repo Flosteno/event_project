@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
   resources :events do
     resources :attendances, only: [:new, :create]
+    resources :pictures, only: [:create]
   end
   root "events#index"
   devise_for :users
-  resources :users, only: [:show, :edit, :update]
+  resources :users, only: [:show, :edit, :update] do
+    resources :avatars, only: [:create]
+  end
   post 'checkout', to: 'checkout#create'
   resources :attendances do
     collection do

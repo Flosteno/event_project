@@ -9,7 +9,9 @@ class User < ApplicationRecord
   has_many :attendances
   has_many :attended_events, through: :attendances, source: :event
   has_many :admin_events, class_name: "Event", foreign_key: "admin_id", dependent: :destroy
-  
+  has_one_attached :avatar
+
+
   def welcome_send
     puts "Envoie de l'email"
     UserMailer.welcome_email(self).deliver_now

@@ -4,7 +4,7 @@
 
     <h3 class="mb-3 text-center">Modifier mon profil</h3>
 
-  <%= form_with(model: @user, local: true) do |form| %>
+  <%= form_with(model: @user, local: true, multipart: true) do |form| %>
     <% if @user.errors.any? %>
       <div class="error-message">
         <h4><%= pluralize(@user.errors.count, "erreur") %> empêchent la mise à jour :</h4>
@@ -15,6 +15,21 @@
         </ul>
       </div>
     <% end %>
+
+    <div class="text-center">
+      <% if @user.avatar.attached? %>
+        <%= image_tag url_for(@user.avatar), class: "rounded-circle mb-3", size: "200" %>
+      <% else %>
+        <%= image_tag "defaults/avatar_man.png", class: "rounded-circle mb-3", size: "200" %>
+      <% end %>
+    </div>
+
+
+
+    <div class="mb-3">
+      <%= form.label :avatar, "Avatar", class: "form-label" %>
+      <%= form.file_field :avatar, class: "form-control" %>
+    </div>
 
     <div class="form-group mb-3">
       <%= form.label :first_name, class: "form-label" %>
@@ -30,6 +45,7 @@
       <%= form.label :description, class: "form-label" %>
       <%= form.text_area :description, rows: 5, class: "form-control" %>
     </div>
+    
 
     <%= form.submit "Mettre à jour", class: "btn btn-primary w-100" %>
   <% end %>

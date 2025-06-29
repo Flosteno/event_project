@@ -1,7 +1,13 @@
 <div class="container py-5 shadow">
   <!-- 👤 En-tête Profil -->
   <div class="row mb-4">
-    <div class="col-md-12">
+    <div class="col-md-12 text-center">
+      <% if @user.avatar.attached? %>
+        <%= image_tag url_for(@user.avatar), class: "rounded-circle mb-3", style: "width: 200px; height: 200px; object-fit: cover;" %>
+      <% else %>
+        <%= image_tag "defaults/avatar_man.png", class: "rounded-circle mb-3", style: "width: 200px; height: 200px; object-fit: cover;" %>
+      <% end %>
+
       <h1 class="h3">Profil de <%= @user.first_name %> <%= @user.last_name %></h1>
     </div>
   </div>

@@ -20,7 +20,7 @@
           </p>
           <p class="card-text mb-1"><i class="bi bi-geo-alt"></i> <%= event.location %></p>
           <p class="card-text mb-1"><i class="bi bi-currency-euro"></i> À partir de <%= number_to_currency(event.price, unit: "€", separator: ",", delimiter: " ") %></p>
-          <p class="card-text small text-muted"><i class="bi bi-person"></i> <%= event.admin&.first_name || "Anonyme" %></p>
+          <p class="card-text small text-muted"><i class="bi bi-person"></i> <%= "#{event.admin&.first_name} #{event.admin&.last_name}" || "Anonyme" %></p>
           
           <div class="mt-auto">
             <%= link_to "Voir", event_path(event), class: "btn btn-outline-secondary w-100" %>

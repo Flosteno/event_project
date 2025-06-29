@@ -5,11 +5,17 @@
         <div class="row g-0 align-items-center">
 
           <div class="col-auto">
-            <img src="https://randomuser.me/api/portraits/men/32.jpg"
-                 alt="Utilisateur"
-                 class="img-fluid rounded-start"
-                 style="height: 100px; width: 100px; object-fit: cover;" />
+            <% if attendance.user.avatar.attached? %>
+              <%= image_tag url_for(attendance.user.avatar), 
+                class: "img-fluid rounded-start", 
+                style: "width: 100px; height: 100px; object-fit: cover;" %>
+            <% else %>
+              <%= image_tag "defaults/avatar_man.png", 
+                class: "img-fluid rounded-start", 
+                style: "width: 100px; height: 100px; object-fit: cover;" %>
+            <% end %>
           </div>
+
           
           <div class="col">
             <div class="card-body">
@@ -22,7 +28,7 @@
               </h5>
               
               <p class="card-text mb-1">
-                Participant depuis <%= time_ago_in_words(attendance.user.created_at) %>
+                Inscrit depuis <%= time_ago_in_words(attendance.user.created_at) %>
               </p>
 
               <% if attendance.user.description %>
