@@ -72,7 +72,7 @@ group :development do
  gem "table_print", "~> 1.5"
 end
 
-gem "stripe", "~> 15.2"
+gem "stripe", "~> 15.3"
 
 group :development do
   gem "hotwire-spark"
